@@ -1,0 +1,115 @@
+<mvc:View controllerName="com.app.vendor.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+         <FlexBox
+    justifyContent="Center"
+    alignItems="Center"
+    height="100%"
+    width="100%"
+    id="flexBoxPage8"
+>
+<VBox >
+                    <form:SimpleForm
+         width="auto"
+    class="sapUiResponsiveMargin myCustomFormWithShadow"
+    layout="ResponsiveGridLayout"
+    editable="true"
+    labelSpanL="3"
+    labelSpanM="3"
+    emptySpanL="4"
+    emptySpanM="4"
+    columnsL="1"
+    columnsM="1"
+    title="Book a Slot">
+        <form:content>
+        <VBox >
+             <Label
+                                id="labelVehicleNum"
+                                class="vendorDetails"
+                                text="Vehicle Number:"
+                                textAlign="Center"
+                            />
+                            <Input
+                            id="idVehicalNo1"
+                                type="Text"
+                               
+                                value=""
+                               submit=".onVehicleNumberSubmit1"
+                            />
+ 
+                            <Label
+                                id="labelDriverName"
+                                class="vendorDetails"
+                                text="Driver Name:"
+                                textAlign="Center"
+                            />
+                            <Input
+                            id="idDriverName"
+                                class="vendorClassDetails"
+                                type="Text"
+                               
+                                value=""
+                            />
+ 
+                            <Label
+                                id="labelDriverPhNo"
+                                class="vendorDetails"
+                                text="Driver Phone Number:"
+                                textAlign="Center"
+                            />
+                            <Input
+                            id="idPhone"
+                                type="Tel"
+                               
+                                value=""
+                            />
+                            <Label
+                                id="labelVehicleEstTime"
+                                class="vendorDetails"
+                                text="Vehicle Estimated Time:"
+                                textAlign="Center"
+                            />
+                            <DateTimePicker id="idEstimatedTime" value="{
+                path: '/dtValue',
+                type: 'sap.ui.model.type.DateTime'}" />
+    <HBox >
+    <Button
+                                id="register"
+                                class="sapUiTinyMarginEnd"
+                                text="Register"
+                                type="Success"
+                                press="registerBtn"
+ 
+                            />
+                             <Button
+                                id="unRegister"
+                                class="sapUiTinyMarginBegin"
+                                text="UnRegister"
+                                type="Negative"
+                                press="unRegister"
+                            /></HBox>
+                           
+                            </VBox>
+                           
+                           
+        </form:content>
+    </form:SimpleForm>
+    </VBox>
+    <VBox >
+    <MessageStrip
+                id="idMessageStrip8"
+                visible="false"
+                type="Success"  
+                showIcon="true"
+                showCloseButton="true"
+                >
+        </MessageStrip></VBox>
+     
+                       
+                        </FlexBox>
+                         
+    </Page>
+</mvc:View>

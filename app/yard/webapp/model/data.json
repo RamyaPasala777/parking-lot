@@ -1,0 +1,50 @@
+{
+    "selectedKey": "page1",
+    "navigation": [
+       
+        {
+            "title": "Analytics",
+            "key": "page1",
+            "icon":"pie-chart"
+        },
+        {
+            "title": "Parking Slot Assignment",
+            "key": "page2",
+            "icon":"employee"
+        },
+        {
+            "title": "All Slots",
+            "key": "page3",
+            "icon":"sap-icon://expand-all"
+        },
+        {
+            "title": "Allocated Slots",
+            "key": "page4",
+            "icon":"sap-icon://approvals"
+        },
+       
+        {
+            "title": "Empty Slots",
+            "key": "page5",
+            "icon":"sap-icon://action"
+        },
+        {
+            "title": "Reserved Slots",
+            "key": "page6",
+            "icon":"kpi-managing-my-area"
+        },
+        {
+            "title": "History",
+            "key": "page7",
+            "icon":"sap-icon://customer-history"
+        },
+        {
+            "title": "Pre-Booking",
+            "key": "page8",
+            "icon":"sap-icon://appointment"
+        }
+
+       
+    ]
+   
+}

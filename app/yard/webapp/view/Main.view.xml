@@ -1,0 +1,1470 @@
+<mvc:View
+    controllerName="com.app.yard.controller.Main"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns:mdc="sap.ui.mdc"
+    xmlns:mdcValueHelp="sap.ui.mdc.valuehelp"
+    xmlns:mdcValueHelpContent="sap.ui.mdc.valuehelp.content"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:chart="sap.suite.ui.commons"
+    height="100%"
+>
+    <tnt:ToolPage
+        id="toolPage"
+        class="all"
+    >
+        <tnt:header>
+            <tnt:ToolHeader class="header">
+                <Button
+                    id="sideNavigationToggleButton"
+                    icon="sap-icon://menu2"
+                    type="Transparent"
+                    press=".onSideNavButtonPress"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <Image
+                    height="1.5rem"
+                    class="sapUiSmallMarginBegin"
+                    src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg"
+                />
+                <VBox>
+                    <Title
+                        level="H1"
+                        text="Parking lot Allotment"
+                        wrapping="false"
+                        class="Text"
+                        id="parkinglotallotment"
+                    />
+                    <Text
+                        id="idHeading"
+                        class=""
+                    />
+                    <ToolbarSpacer width="20px" />
+                </VBox>
+
+                <tnt:ToolHeaderUtilitySeparator />
+                <ToolbarSpacer>
+                    <layoutData>
+                        <OverflowToolbarLayoutData
+                            priority="NeverOverflow"
+                            minWidth="20px"
+                        />
+                    </layoutData>
+                </ToolbarSpacer>
+                <Button
+                    id="btnallocatedslots"
+                    text="AllocatedSlots"
+                    press="onAllocatedSlots"
+                >
+                    <customData>
+                        <BadgeCustomData
+                            id="idbadge1"
+                            class="badge1"
+                            visible="true"
+                        />
+                    </customData>
+                </Button>
+                <Button
+                    id="btnreservedslots"
+                    text="ReservedSlots"
+                    press="onReservedSlots"
+                >
+                    <customData>
+                        <BadgeCustomData
+                            id="idbadge2"
+                            class="badge"
+                            visible="true"
+                        />
+                    </customData>
+                </Button>
+                <Button
+                    id="btnemptyslots"
+                    text="EmptySlots"
+                    press="onEmptySlots"
+                >
+                    <customData>
+                        <BadgeCustomData
+                            id="idbadge3"
+                            class="badge"
+                            visible="true"
+                        />
+                    </customData>
+                </Button>
+                <Button
+                    id="btnallslots"
+                    text="AllSlots"
+                    press="onAllSlots"
+                >
+                    <customData>
+                        <BadgeCustomData
+                            id="idbadge4"
+                            class="badge"
+                            visible="true"
+                        />
+                    </customData>
+                </Button>
+
+                <!-- <Button id="btnallocatedslots" text="AllocatedSlots" press="onAllocatedSlots"></Button>
+                <Button id="btnreservedslots" text="ReservedSlots" press="onReservedSlots"></Button>
+                <Button id="btnemptyslots" text="EmptySlots" press="onEmptySlots"></Button> -->
+
+                <Button
+                    id="idNotification"
+                    icon="sap-icon://bell"
+                    type="Transparent"
+                    press="onNotificationPress"
+                    class="line-md--bell-alert-loop"
+                    tooltip="Notification"
+                >
+                    <customData>
+                        <BadgeCustomData
+                            id="idbadge"
+                            class="badge"
+                            visible="true"
+                        />
+                    </customData>
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+                <tnt:ToolHeaderUtilitySeparator />
+                <ToolbarSpacer width="1.125rem" />
+                <Avatar
+                    src="test-resources/sap/tnt/images/Woman_avatar_01.png"
+                    displaySize="XS"
+                    press=".onAvatarPressed"
+                    tooltip="Profile"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Avatar>
+
+                <!-- <MenuButton
+                    id="_IDGenMenuButton1"
+                    text="More"
+                   
+                >
+                    <Menu id="_IDGenMenu1">
+                        <items>
+                            <MenuItem
+                                id="btnallslots"
+                                text="All Slots"
+                                press="onAllSlots"
+                            />
+                            <MenuItem
+                                id="btnallocatedslots"
+                                text="Allocated slots"
+                                press="onAllocatedSlots"
+                            />
+                             <MenuItem
+                                id="btnemptyslots"
+                                text="Empty slots"
+                                press="onEmptySlots"
+                            />
+                             <MenuItem
+                                id="btnreservedslots"
+                                text="Reserved slots"
+                                press="onReservedSlots"
+                            />
+                        </items>
+                    </Menu>
+                </MenuButton> -->
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:sideContent>
+            <tnt:SideNavigation
+                expanded="true"
+                selectedKey="{/selectedKey}"
+                itemSelect=".onItemSelect"
+                class="navigation"
+            >
+                <tnt:NavigationList
+                    items="{path: '/navigation'}"
+                    class="navigation"
+                >
+                    <tnt:NavigationListItem
+                        text="{title}"
+                        icon="{icon}"
+                        enabled="{enabled}"
+                        expanded="{expanded}"
+                        items="{items}"
+                        class="navigation"
+                        key="{key}"
+                        visible="{visable}"
+                    >
+                        <tnt:NavigationListItem
+                            text="{title}"
+                            key="{key}"
+                            class="navigation"
+                            enabled="{enabled}"
+                        />
+                    </tnt:NavigationListItem>
+                </tnt:NavigationList>
+                <tnt:fixedItem>
+                    <tnt:NavigationList
+                        items="{path: '/fixedNavigation'}"
+                        class="navigation"
+                    >
+                        <tnt:NavigationListItem
+                            text="{title}"
+                            icon="{icon}"
+                            class="navigation"
+                        />
+                    </tnt:NavigationList>
+                </tnt:fixedItem>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+        <tnt:mainContents>
+            <NavContainer
+                id="pageContainer"
+                initialPage="page1"
+            >
+                <pages>
+                    <ScrollContainer
+                        id="page9"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <VBox>
+                            <Text text="Hii " />
+                            <Image
+                                class="image"
+                                src="https://cdn1.vectorstock.com/i/1000x1000/13/30/warehouse-building-outside-vector-10601330.jpg"
+                                height="450px"
+                                width="450px"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="page1"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <VBox>
+                            <viz:VizFrame
+                                class="pieChart"
+                                id="idPieChart"
+                                width="auto"
+                                vizType="pie"
+                                vizProperties="{
+           plotArea:{
+                            dataLabel:{visible: true}
+                },
+                            title : {text:'Title'}
+            }"
+                                selectData="myOnClickHandler"
+                                renderComplete="handleRenderComplete"
+                            >
+                                <viz:dataset>
+                                    <viz.data:FlattenedDataset
+                                        data="{PieModel>/PlotCounts}"
+                                    >
+                                        <viz.data:dimensions>
+                                            <viz.data:DimensionDefinition
+                                                name="Availability"
+                                                value="{status}"
+                                            />
+                                        </viz.data:dimensions>
+                                        <viz.data:measures>
+                                            <viz.data:MeasureDefinition
+                                                name="Count"
+                                                value="{count}"
+                                            />
+                                        </viz.data:measures>
+                                    </viz.data:FlattenedDataset>
+                                </viz:dataset>
+                                <viz:feeds>
+                                    <viz.feeds:FeedItem
+                                        uid="size"
+                                        type="Measure"
+                                        values="Count"
+                                    />
+                                    <viz.feeds:FeedItem
+                                        uid="color"
+                                        type="Dimension"
+                                        values="Availability"
+                                    />
+                                </viz:feeds>
+                            </viz:VizFrame>
+                        </VBox>
+                        <VBox id="vendor1">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="page2"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <FlexBox
+                            class="flexbox"
+                            justifyContent="Center"
+                            alignItems="Center"
+                            height="100%"
+                            id="idpage2"
+                            width="100%"
+                        >
+                            <form:SimpleForm
+                                width="100%"
+                                class="form"
+                                layout="ResponsiveGridLayout"
+                                editable="true"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                columnsL="1"
+                                columnsM="1"
+                            >
+                                <Bar>
+                                    <contentLeft>
+                                        <Text
+                                            text="Assign/Unassign"
+                                            class="heading"
+                                        />
+                                    </contentLeft>
+                                    <contentRight>
+                                        <Button
+                                            id="cancelbtn11"
+                                            icon="sap-icon://print"
+                                            press="onPrintPress"
+                                            type="Default"
+                                        />
+                                        <Button
+                                            id="cancelbtn12"
+                                            icon="sap-icon://camera"
+                                            press="onCameraPress"
+                                            type="Default"
+                                        />
+                                    </contentRight>
+                                </Bar>
+
+                                <!-- <Title text="Parking Lot Assignment" textAlign="Center"></Title> -->
+                                <form:content>
+                                    <FlexBox
+                                        justifyContent="Center"
+                                        alignItems="Center"
+                                        class="sapUiTinyMarginTop"
+                                    >
+                                        <VBox class="sapUiSmallMargin">
+                                            <Label
+                                                text="Vehicle No:"
+                                                class="text"
+                                            />
+                                            <Input
+                                                required="true"
+                                                id="idVehicalNo"
+                                                value="{localModel>/vehicalDetails/vehicalNo}"
+                                                submit=".onVehicleNumberSubmit"
+                                            />
+
+                                            <Label
+                                                text="Driver Name:"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="drivername"
+                                                value="{localModel>/vehicalDetails/driverName}"
+                                            />
+
+                                            <Label
+                                                text="Phone:"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="phonenumber"
+                                                value="{localModel>/vehicalDetails/phone}"
+                                                type="Number"
+                                            />
+
+                                            <!-- <Label class="text" text="Vehicle Type:" /> -->
+                                            <!-- <Input
+                                    id="vehicletype"
+
+                                    value="{localModel>/vehicalDetails/vehicalType}"
+
+                                    
+                                />  -->
+
+                                            <VBox>
+                                                <Label
+                                                    class="text"
+                                                    text="Process Type:"
+                                                />
+                                                <Text
+                                                    id="idAlotProcess"
+                                                    visible="false"
+                                                />
+
+                                                <!-- <Switch
+                                        change=".onChange"
+                                        class="sapUiMedium"
+                                        customTextOn="Inward"
+                                        customTextOff="OutWard"
+                                    /> -->
+                                                <Select
+                                                    id="idProcessType"
+                                                    forceSelection="false"
+                                                >
+                                                    <core:ListItem
+                                                        id="idProcessTypeItems"
+                                                        text="Inward"
+                                                    />
+                                                    <core:ListItem
+                                                        id="idProcessTypeItems1"
+                                                        text="OutWard"
+                                                    />
+                                                </Select>
+                                            </VBox>
+
+                                            <!-- <HBox>
+                                    <Text text="ProcessType" />
+                                    <Switch
+                                        change=".onChange"
+                                        class="sapUiMedium"
+                                        customTextOn="Inward"
+                                        customTextOff="OutWard"
+                                    />
+                                </HBox> -->
+                                            <Label
+                                                text="Slot No"
+                                                labelFor="productInput"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="productInput"
+                                                placeholder="Enter SlotNo"
+                                                showValueHelp="true"
+                                                valueHelpRequest=".onValueHelpRequest"
+                                                suggestionItems="{/PlotNOs}"
+                                            >
+                                                <suggestionItems>
+                                                    <core:Item
+                                                        text="{plot_NO}"
+                                                    />
+                                                </suggestionItems>
+                                            </Input>
+
+                                            <HBox class="sapUiTinyMarginTop">
+                                                <Button
+                                                    text="Assign"
+                                                    press="onAssignPress"
+                                                    class="sapUiTinyMarginEnd"
+                                                />
+                                                <Button
+                                                    text="UnAssign"
+                                                    press="onUnAssignPress"
+                                                    class="sapUiTinyMarginBegin"
+                                                />
+                                            </HBox>
+                                        </VBox>
+                                    </FlexBox>
+                                    <MessageStrip
+                                        id="idMessageStrip1"
+                                        visible="false"
+                                        type="Error"
+                                        showIcon="true"
+                                        showCloseButton="true"
+                                        class="sapUiMediumMarginBottom"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </FlexBox>
+                        <VBox id="vendor2">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="page3"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <Table
+                            id="idAllSlots"
+                            alternateRowColors="true"
+                            items="{/PlotNOs}"
+                            class="allslots"
+                        >
+                            <columns>
+                                <Column id="idSlotNO">
+                                    <Title
+                                        id="idSlotNotitle"
+                                        text="SlotNo"
+                                        class="title"
+                                    />
+                                </Column>
+                                <Column id="idStatus">
+                                    <Title
+                                        id="idStatustitle"
+                                        text="Status"
+                                        class="title"
+                                    />
+                                </Column>
+                                <!-- <Column id="idInboundOrOutbound">
+                                    <Title
+                                        id="idInboundOrOutboundtitle"
+                                        text="Type"
+                                        class="title"
+                                    />
+                                </Column> -->
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    class="allTableHeading"
+                                    id="idColumnListAllSlots"
+                                >
+                                    <cells>
+                                        <Text
+                                            id="idSlotNoValue"
+                                            text="{plot_NO}"
+                                            class="text3"
+                                        />
+                                    </cells>
+                                    <cells>
+                                        <Text
+                                            id="idStatusValue"
+                                            class="text3"
+                                            text="{= ${available} ? ${reserved}? 'Reserved':'Available' : 'Occupied'}"
+                                        />
+                                    </cells>
+                                    <!-- <cells>
+                                        <Text
+                                            id="idInboundOrOutboundValue"
+                                            class="text3"
+                                            text="{inBoundOroutBound}"
+                                        />
+                                    </cells> -->
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="vendor3">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="page4"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <!-- <Input  id="input" submit=".onSubmit1" placeholder="search" width="20%" class="sapUiMediumMargin"></Input> -->
+                        <Table
+                            id="AllocatedSlotsTable"
+                            items="{
+            path: '/VehicalDeatils'
+           
+        }"
+                            mode="MultiSelect"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <Title text="Allocated Slots" />
+                                    <ToolbarSpacer id="idTableHeaderSpacer2" />
+                                    <SearchField
+                                        id="idonSearch"
+                                        visible="false"
+                                        width="20%"
+                                        liveChange="onSearchAllocatedSlots"
+                                        class="sapUiLarge"
+                                    >
+                                        <layoutData>
+                                            <OverflowToolbarLayoutData
+                                                priority="NeverOverflow"
+                                            />
+                                        </layoutData>
+                                    </SearchField>
+                                    <Button
+                                        text="ShowFilter"
+                                        id="idShowFilter"
+                                        press="onButPress"
+                                    />
+                                    <Button
+                                        id="editButton"
+                                        text="Edit"
+                                        type="Transparent"
+                                        press="onEdit"
+                                        icon="sap-icon://edit"
+                                    />
+                                    <Button
+                                        id="saveButton"
+                                        text="Save"
+                                        type="Transparent"
+                                        press="onSave"
+                                        visible="false"
+                                        icon="sap-icon://save"
+                                    />
+                                    <Button
+                                        id="cancelButton"
+                                        text="Cancel"
+                                        type="Transparent"
+                                        press="onCancel"
+                                        visible="false"
+                                        icon="sap-icon://decline"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Title
+                                        text="Slot Number"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Vehicle Number"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Driver Name"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Driver Ph.no"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Process Type"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Vehicle In Time"
+                                        class="title"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem id="AllocatedslotsCLI">
+                                    <cells>
+                                        <VBox>
+                                            <Text
+                                                text="{plotNo_plot_NO}"
+                                                class="text"
+                                            />
+                                            <ComboBox
+                                                id="parkingLotSelectComboBox"
+                                                selectedKey="{plotNo_plot_NO}"
+                                                items="{path: '/PlotNOs',  filters: [{ path: 'available', operator: 'EQ', value1: true },{ path: 'reserved', operator: 'EQ', value1: false }], parameters:{$count:true}, templateShareable:true }"
+                                                visible="false"
+                                            >
+                                                <core:Item
+                                                    id="IDParkinglotnumgen"
+                                                    key="{plot_NO}"
+                                                    text="{plot_NO}"
+                                                />
+                                            </ComboBox>
+                                        </VBox>
+
+                                        <VBox>
+                                            <Text
+                                                id="idVehicalNoText"
+                                                text="{vehicalNo}"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="idVehicalNoText1"
+                                                value="{vehicalNo}"
+                                                visible="false"
+                                                class="text"
+                                                editable="false"
+                                            />
+                                        </VBox>
+
+                                        <VBox>
+                                            <Text
+                                                id="idDriverText"
+                                                text="{driverName}"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="idDriverText1"
+                                                value="{driverName}"
+                                                visible="false"
+                                                editable="false"
+                                                class="text"
+                                            />
+                                        </VBox>
+
+                                        <VBox>
+                                            <Text
+                                                id="idPhoneText"
+                                                text="{phone}"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="idPhoneText1"
+                                                value="{phone}"
+                                                visible="false"
+                                                editable="false"
+                                                class="text"
+                                            />
+                                        </VBox>
+                                        <VBox>
+                                            <Text
+                                                id="idVtText"
+                                                text="{vehicalType}"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="idVtText1"
+                                                value="{vehicalType}"
+                                                visible="false"
+                                                editable="false"
+                                                class="text"
+                                            />
+                                        </VBox>
+
+                                        <VBox>
+                                            <Text
+                                                id="idAssText"
+                                                text="{assignedDate}"
+                                                class="text"
+                                            />
+                                            <Input
+                                                id="idAssText1"
+                                                value="{assignedDate}"
+                                                visible="false"
+                                                editable="false"
+                                                class="text"
+                                            />
+                                        </VBox>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="vendor4">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+
+                    <ScrollContainer
+                        id="page5"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <Table
+                            id="idAllSlots1"
+                            alternateRowColors="true"
+                            items="{
+            path: '/PlotNOs',
+             filters: [{ path: 'available', operator: 'EQ', value1: true }]
+        }"
+                        >
+                            <columns>
+                                <Column id="idSlotNO1">
+                                    <Title
+                                        id="idSlotNotitle1"
+                                        text="SlotNo"
+                                        class="title"
+                                    />
+                                </Column>
+                                <Column id="idStatus1">
+                                    <Title
+                                        id="idStatustitle1"
+                                        text="Status"
+                                        class="title"
+                                    />
+                                </Column>
+                                <!-- <Column id="idInboundOrOutbound1">
+                                    <Title
+                                        id="idInboundOrOutboundtitle1"
+                                        text="Type"
+                                        class="title"
+                                    />
+                                </Column> -->
+                            </columns>
+
+                            <items>
+                                <ColumnListItem id="idColumnListAllSlots1">
+                                    <cells>
+                                        <Text
+                                            id="idSlotNoValue1"
+                                            text="{plot_NO}"
+                                            class="text5"
+                                        />
+                                    </cells>
+                                    <cells>
+                                        <Text
+                                            class="text5"
+                                            id="idStatusValue1"
+                                            text="{= ${available} ? ${reserved}? 'Reserved':'Available' : 'Occupied'}"
+                                        />
+                                    </cells>
+                                    <!-- <cells>
+                                        <Text
+                                            class="text5"
+                                            id="idInboundOrOutboundValue1"
+                                            text="{inBoundOroutBound}"
+                                        />
+                                    </cells> -->
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="vendor5">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+
+                    <ScrollContainer
+                        id="page6"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <Table
+                            id="reservedSlotsTable"
+                            alternateRowColors="true"
+                            class="reservedslotstable"
+                            items="{
+            path: '/Reservation',
+            filters: [{ path: 'status', operator: 'EQ', value1: true }]
+        }"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar id="idOverflowToolbar">
+                                    <ToolbarSpacer id="idtoolbar" />
+                                    <SearchField
+                                        width="20%"
+                                        liveChange="onSearchReserved"
+                                        class="sapUiLarge"
+                                        id="searchField1"
+                                        visible="false"
+                                    >
+                                        <layoutData>
+                                            <OverflowToolbarLayoutData
+                                                priority="NeverOverflow"
+                                            />
+                                        </layoutData>
+                                    </SearchField>
+                                    <Button
+                                        text="ShowFilter"
+                                        id="idShowFilter1"
+                                        press="onButPress1"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+
+                            <columns>
+                                <Column>
+                                    <Title
+                                        text="Slot Number"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Vehicle Number"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Driver Name"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Driver Ph.no"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Process Type"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Estimated Time"
+                                        class="title"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem id="reservedSlots">
+                                    <cells>
+                                        <Text
+                                            text="{plotNo_plot_NO}"
+                                            class="text5"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{vehicalNo}"
+                                            class="text5"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{driverName}"
+                                            class="text5"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{phone}"
+                                            class="text5"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{vehicalType}"
+                                            class="text5"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{estimatedTime}"
+                                            class="text5"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="vendor6">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="page7"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding page7"
+                    >
+                        <Table
+                            id="HistoryTable"
+                            items="{/History}"
+                            alternateRowColors="true"
+                            class="historyTable"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <ToolbarSpacer id="idTableHeaderSpacer" />
+                                    <SearchField
+                                        id="idSearchField2"
+                                        width="20%"
+                                        liveChange="onSearchHistory"
+                                        class="sapUiLarge"
+                                        visible="false"
+                                    >
+                                        <layoutData>
+                                            <OverflowToolbarLayoutData
+                                                priority="NeverOverflow"
+                                            />
+                                        </layoutData>
+                                    </SearchField>
+                                    <Button
+                                        text="ShowFilter"
+                                        id="idShowFilter2"
+                                        press="onButPress2"
+                                    />
+                                    <Button
+                                        text="Print"
+                                        icon="sap-icon://print"
+                                        press="onPrint"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+
+                            <columns>
+                                <Column>
+                                    <Title
+                                        text="Slot Number"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Vehicle Number"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Driver Name"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Driver Ph.no"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Process Type"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Vehicle In Time"
+                                        class="title"
+                                    />
+                                </Column>
+
+                                <Column>
+                                    <Title
+                                        text="Vehicle Out Time"
+                                        class="title"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem id="HistoryCLI">
+                                    <cells>
+                                        <Text
+                                            text="{plotNo_plot_NO}"
+                                            class="text6"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{vehicalNo}"
+                                            class="text6"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{driverName}"
+                                            class="text6"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{phone}"
+                                            class="text6"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text text="{vehicalType}" />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{assignedDate}"
+                                            class="text6"
+                                        />
+                                    </cells>
+
+                                    <cells>
+                                        <Text
+                                            text="{unassignedDate}"
+                                            class="text6"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="vendor7">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+                    </ScrollContainer>
+
+                    <ScrollContainer
+                        id="page8"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <FlexBox
+                            justifyContent="Center"
+                            alignItems="Center"
+                            height="100%"
+                            width="100%"
+                            id="flexBoxPage8"
+                        >
+                            <form:SimpleForm
+                                width="80%"
+                                class="sapUiLargeMargin myCustomFormWithShadow"
+                                layout="ResponsiveGridLayout"
+                                editable="true"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                columnsL="1"
+                                columnsM="1"
+                                title="Pre-Booking"
+                            >
+                                <form:content>
+                                    <VBox>
+                                        <Label
+                                            id="labelVehicleNum"
+                                            class="vendorDetails"
+                                            text="Vehicle Number:"
+                                            textAlign="Center"
+                                        />
+                                        <Input
+                                            id="idVehicalNo1"
+                                            type="Text"
+                                            value=""
+                                            submit=".onVehicleNumberSubmit1"
+                                        />
+
+                                        <Label
+                                            id="labelDriverName"
+                                            class="vendorDetails"
+                                            text="Driver Name:"
+                                            textAlign="Center"
+                                        />
+                                        <Input
+                                            id="idDriverName"
+                                            class="vendorClassDetails"
+                                            type="Text"
+                                            value=""
+                                        />
+
+                                        <Label
+                                            id="labelDriverPhNo"
+                                            class="vendorDetails"
+                                            text="Driver Phone Number:"
+                                            textAlign="Center"
+                                        />
+                                        <Input
+                                            id="idPhone"
+                                            type="Tel"
+                                            value=""
+                                        />
+
+                                        <VBox>
+                                            <Text
+                                                text="Process Type:"
+                                                class="vendorDetails"
+                                            />
+                                            <Text
+                                                id="idProcessTypeResInput"
+                                                visible="false"
+                                            />
+                                            <Select
+                                                id="idProcessTypeRes"
+                                                forceSelection="false"
+                                                change="onProcessTypeChange"
+                                            >
+                                                <core:ListItem
+                                                    id="idProcessTypeItemsRes"
+                                                    text="Inward"
+                                                />
+                                                <core:ListItem
+                                                    id="idProcessTypeItems1Res"
+                                                    text="OutWard"
+                                                />
+                                            </Select>
+                                        </VBox>
+
+                                        <!-- <Label
+                                id="labelinwardOutward"
+                                class="vendorDetails"
+                                text="Inward/Outward:"
+                                textAlign="Center"
+                            />
+                            <Input
+                                type="Text"
+                                width="40%"
+                            /> -->
+
+                                        <Label
+                                            id="labelSlotNo"
+                                            class="vendorDetails"
+                                            text="Slot Number:"
+                                            textAlign="Center"
+                                        />
+
+                                        <!-- <Input
+                                    id="idSlot"
+                                    placeholder="Enter SlotNo"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".onValueHelpRequest"
+                                    suggestionItems="{/PlotNOs}"
+                                >
+                                    <suggestionItems>
+                                        <core:Item text="{plot_NO}" />
+                                    </suggestionItems>
+                                </Input> -->
+                                        <Select
+                                            id="idslot1"
+                                            forceSelection="false"
+                                            items="{
+            path: '/PlotNOs',
+            filters: [{ path: 'available', operator: 'EQ', value1: true },{ path: 'reserved', operator: 'EQ', value1: false }]
+        }"
+                                            change="onPlotSelectChange"
+                                        >
+                                            <core:ListItem
+                                                id="idSlot"
+                                                text="{plot_NO}"
+                                            />
+                                        </Select>
+                                        <Text
+                                            id="idtext"
+                                            visible="false"
+                                        />
+
+                                        <Label
+                                            id="labelVehicleEstTime"
+                                            class="vendorDetails"
+                                            text="Vehicle Estimated Time:"
+                                            textAlign="Center"
+                                        />
+                                        <DateTimePicker
+                                            id="idEstimatedTime"
+                                            value="{
+                path: '/dtValue',
+                type: 'sap.ui.model.type.DateTime'}"
+                                        />
+                                        <HBox>
+                                            <Button
+                                                id="register"
+                                                class="register"
+                                                text="Register"
+                                                type="Success"
+                                                press="registerBtn"
+                                            />
+                                            <Button
+                                                id="unRegister"
+                                                class="register"
+                                                text="UnRegister"
+                                                type="Negative"
+                                                press="unRegister"
+                                            />
+                                        </HBox>
+                                    </VBox>
+                                </form:content>
+                            </form:SimpleForm>
+                        </FlexBox>
+                        <VBox id="idPage8">
+                            <IllustratedMessage
+                                description="Your request for access has been denied. If you have any questions or require further information, please contact Supervisor 📞 '9977885676'."
+                                title=" Unable to access this Page"
+                                illustrationType="sapIllus-UnableToLoad"
+                                visible="{= ${/hasError} }"
+                            />
+                        </VBox>
+
+                        <FlexBox
+                            justifyContent="Center"
+                            alignItems="Center"
+                            height="100%"
+                            width="100%"
+                            id="flexBoxPageVendor"
+                        >
+                            <VBox>
+                                <form:SimpleForm
+                                    width="auto"
+                                    class="sapUiResponsiveMargin myCustomFormWithShadow"
+                                    layout="ResponsiveGridLayout"
+                                    editable="true"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    columnsL="1"
+                                    columnsM="1"
+                                    title="Book a Slot"
+                                >
+                                    <form:content>
+                                        <VBox>
+                                            <Label
+                                                id="labelVehicleNumVe"
+                                                class="vendorDetails"
+                                                text="Vehicle Number:"
+                                                textAlign="Center"
+                                            />
+                                            <Input
+                                                id="idVehicalNoVe"
+                                                type="Text"
+                                                value=""
+                                                submit=".onVehicleNumberSubmit1"
+                                            />
+
+                                            <Label
+                                                id="labelDriverNameVe"
+                                                class="vendorDetails"
+                                                text="Driver Name:"
+                                                textAlign="Center"
+                                            />
+                                            <Input
+                                                id="idDriverNameVe"
+                                                class="vendorClassDetails"
+                                                type="Text"
+                                                value=""
+                                            />
+
+                                            <Label
+                                                id="labelDriverPhNoVe"
+                                                class="vendorDetails"
+                                                text="Driver Phone Number:"
+                                                textAlign="Center"
+                                            />
+                                            <Input
+                                                id="idPhoneVe"
+                                                type="Tel"
+                                                value=""
+                                            />
+
+                                            <VBox>
+                                                <Label
+                                                    id="labeProcessType"
+                                                    class="vendorDetails"
+                                                    text="Process Type:"
+                                                    textAlign="Center"
+                                                />
+                                                <Select
+                                                    id="idProcessTypeResVendor"
+                                                    forceSelection="false"
+                                                >
+                                                    <core:ListItem
+                                                        id="idProcessTypeItemsResVendor"
+                                                        text="Inward"
+                                                    />
+                                                    <core:ListItem
+                                                        id="idProcessTypeItems1ResVendor"
+                                                        text="OutWard"
+                                                    />
+                                                </Select>
+                                            </VBox>
+
+                                            <Label
+                                                id="labelVehicleEstTimeVe"
+                                                class="vendorDetails"
+                                                text="Vehicle Estimated Time:"
+                                                textAlign="Center"
+                                            />
+                                            <DateTimePicker
+                                                id="idEstimatedTimeVe"
+                                                value="{
+                path: '/dtValue',
+                type: 'sap.ui.model.type.DateTime'}"
+                                            />
+                                            <HBox>
+                                                <Button
+                                                    id="registerVe"
+                                                    class="sapUiTinyMarginEnd"
+                                                    text="Reserve"
+                                                    type="Success"
+                                                    press="registerBtn"
+                                                />
+                                                <Button
+                                                    id="unRegisterVe"
+                                                    class="sapUiTinyMarginBegin"
+                                                    text="UnReserve"
+                                                    type="Negative"
+                                                    press="unRegister"
+                                                />
+                                            </HBox>
+                                        </VBox>
+                                    </form:content>
+                                </form:SimpleForm>
+                            </VBox>
+                        </FlexBox>
+
+                        <MessageStrip
+                            id="idMessageStrip8"
+                            visible="false"
+                            type="Success"
+                            showIcon="true"
+                            showCloseButton="true"
+                        />
+                    </ScrollContainer>
+                </pages>
+            </NavContainer>
+        </tnt:mainContents>
+    </tnt:ToolPage>
+</mvc:View>

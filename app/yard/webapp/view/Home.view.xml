@@ -1,0 +1,29 @@
+<mvc:View xmlns:cards="sap.f.cards" controllerName="com.app.yard.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+     xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns="sap.m">
+    <Page
+        title="{i18n>title}"
+        class="page"
+    >
+
+
+    <html:marquee behavior="scroll" direction="Right" scrollamount="5" class="marquee">
+    Welcome to the Warehouse Parking Yard ...........🚚🚚🚚
+    </html:marquee>
+
+
+	
+        <headerContent >
+
+             <Button
+                id="login"
+                text="login"
+                press="login"
+				type="Default"
+            />
+           
+        </headerContent>
+     <Image id="image" src="app/yard/webapp/Image/Artihcus logo.png"></Image>
+    </Page>
+</mvc:View>
